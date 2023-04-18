@@ -1,0 +1,29 @@
+/* 1. Connect to the db server (as root)*/
+
+/*root creates a new database */
+CREATE DATABASE efthimeros_db;
+
+/* 2. root creates a new user and grants privileges to the new database*/
+CREATE USER 'efthimeros'@'localhost' IDENTIFIED BY '4321';
+GRANT ALL PRIVILEGES ON efthimeros_db.* TO 'efthimeros'@'localhost';
+SHOW GRANTS FOR 'efthimeros'@'localhost';
+
+/* 3. log in with the new user and use the efthimeros_db  and create a new table inside efthimeros_db*/
+CREATE TABLE IF NOT EXISTS bank_accounts (
+	account_id INT PRIMARY KEY,
+	firstname VARCHAR(30),
+	lastname VARCHAR(30),
+	address	 VARCHAR(30),
+	balance DOUBLE(10,2),
+	status BOOLEAN,
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
+
+
+
+/*
+--	Some insert examples	--
+
+INSERT INTO bank_accounts (account_id,firstname, lastname,address,balance,status) VALUES (1111, 'Alexandros','Efthimeros','Dervenakiwn 10',10000,1);
+INSERT INTO bank_accounts (account_id,firstname, lastname,address,balance,status) VALUES (2222, 'SOTIRIS','SOTIRIOY','TOMPAZH 10',5400,1);
+INSERT INTO bank_accounts (account_id,firstname, lastname,address,balance,status) VALUES (3333, 'ARTEMIS','SORRAS','OLYMPIOY DIOS 12',100000,0);*/
